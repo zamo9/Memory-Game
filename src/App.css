@@ -1,0 +1,107 @@
+:root {
+  --tile-size: 90px;
+  --gap: 10px;
+  --bg: #f6f7f9;
+  --accent: #007bff;
+}
+
+* { box-sizing: border-box; }
+body, html, #root { height: 100%; margin: 0; font-family: Inter, Arial, sans-serif; background: var(--bg); }
+
+.App {
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 { margin: 0 0 12px 0; font-size: 20px; color: #111; }
+
+.meta { display:flex; gap:20px; margin-bottom:12px; color:#333; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, var(--tile-size));
+  grid-auto-rows: var(--tile-size);
+  gap: var(--gap);
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+/* button tile reset */
+.tile {
+  border: none;
+  padding: 0;
+  background: transparent;
+  width: var(--tile-size);
+  height: var(--tile-size);
+  perspective: 700px;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+}
+
+.tile:focus { box-shadow: 0 0 0 3px rgba(0,123,255,0.25); border-radius: 8px; }
+
+.tile .tile-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.45s cubic-bezier(.2,.9,.3,1);
+  transform-style: preserve-3d;
+}
+
+/* flipped state */
+.tile.flipped .tile-inner {
+  transform: rotateY(180deg);
+}
+
+.tile .front,
+.tile .back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+  border: 1px solid #ddd;
+}
+
+.tile .front {
+  background: #e9edf6;
+}
+
+.tile .back {
+  transform: rotateY(180deg);
+  background: #ffffff;
+  font-size: 28px;
+}
+
+/* end state */
+.end-state {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.replay, .cta {
+  margin: 8px 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.replay { background: #6c757d; color: white; }
+.cta { background: var(--accent); color: white; }
+
+.app-footer {
+  margin-top: 24px;
+  color: #666;
+  font-size: 13px;
+}
